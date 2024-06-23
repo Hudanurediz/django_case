@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iha Features</title>
+    <script>
+        async function fetchFeatures() {
+            const response = await fetch('/ihafeatures/');
+            const features = await response.json();
+            const featuresList = document.getElementById('iha-features');
+            featuresList.innerHTML = '';
+            features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = `ID: ${feature.id}, Name: ${feature.name}, Description: ${feature.description}`;
+                featuresList.appendChild(li);
+            });
+        }
+
+        async function addFeature(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            const response = await fetch('/ihafeatures/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            if (response.ok) {
+                fetchFeatures();
+            } else {
+                alert('Error adding ihafeatures');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchFeatures();
+            document.getElementById('feature-form').addEventListener('submit', addFeature);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div class="login-container">
+        <h1>Iha Özellikleri</h1>
+        <form method="post">
+          <div class="form-group">
+            <input type="text" name="brand" placeholder="Marka giriniz" required />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="model"
+              placeholder="Model giriniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="weight"
+              placeholder="Ağırlık giriniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="category"
+              placeholder="Kategori giriniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="communication_range"
+              placeholder="İletişim aralığı giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="wing_span"
+              placeholder="Kanat açıklığı giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="take_off_and_landing"
+              placeholder="Kalkış ve iniş giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="payload_capacity"
+              placeholder="Yük kapasitesi giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="thrust_type"
+              placeholder="İtiş tipini giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="max_speed"
+              placeholder="Maksimum hızı giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="length"
+              placeholder="Uzunluk giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="operational_altitude"
+              placeholder="Operasonel yükseklik giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="ısr"
+              placeholder="ISR giriniz"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              name="hover_time"
+              placeholder="Havada kalma süresi giriniz"
+            />
+          </div>
+          <button type="submit" class="btn-login">Kaydet</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

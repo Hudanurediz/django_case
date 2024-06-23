@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kayıt Ol</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-container">
+        <h1>Hesap Oluştur</h1>
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="username"
+              name="username"
+              placeholder="Kullanıcı adı belirleyiniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="firstName"
+              name="firstName"
+              placeholder="İsminizi giriniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="lastName"
+              name="lastName"
+              placeholder="Soyadınızı giriniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              name="email"
+              placeholder="Mail adresinizi giriniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              name="password"
+              placeholder="Şifre belirleyiniz"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              name="password2"
+              placeholder="Şifrenizi tekrar giriniz"
+              required
+            />
+          </div>
+          <button type="submit" class="btn-login">Hesap Oluştur</button>
+        </form>
+        <div style="margin-top: 10px">
+          <a href="{% url 'login' %}">Hesabın var mı? Giriş yap</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
